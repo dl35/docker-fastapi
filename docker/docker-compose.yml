@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+  fastapi:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile 
+    container_name: ${CONTAINER_NAME}:${TAG}"
+    image: "${IMAGE_NAME}:${TAG}"
+    depends_on:
+      - mysql 
+      - phpmyadmin
+    #command: uvicorn app.main:app --reload --host 0.0.0.0  --use-colors
+    volumes:
+      - ../app:/code/app
+    environment:
+        - CONTAINER_NAME=${CONTAINER_NAME}:${TAG} 
+    
+    ports:
+      - 8000:8000
+
+
+  mysql:
+    image: mysql:5.6.40
+    #hostname: 'alias-mysql'
+    environment:
+        MYSQL_DATABASE: product
+        MYSQL_USER: prod
+        MYSQL_PASSWORD: prod
+        MYSQL_ROOT_PASSWORD: prod
+    volumes:
+      - ../database:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysql
+    ports:
+          - 3800:80
+    environment:
+          MYSQL_USER: prod
+          MYSQL_PASSWORD: prod
+          MYSQL_ROOT_PASSWORD: prod
+          PMA_HOST: mysql
+  
+    
+    

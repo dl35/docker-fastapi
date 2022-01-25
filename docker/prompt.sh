@@ -1,0 +1,1 @@
+PS1="🐳 \e[0;34m$CONTAINER_NAME\e[0m \w # "
