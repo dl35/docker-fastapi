@@ -27,8 +27,8 @@ def login( form_data: OAuth2PasswordRequestForm = Depends() ,db: Session = Depen
            user=form_data.username
            pwd=form_data.password
 
-           user = "clementine.austen@gmail.com"
-           pwd = "75pa"
+           user = "valentin.andersen@gmail.com"
+           pwd = "13ma"
            
            obj = crud.get(db, user , pwd )
        except exceptions.UserException as ue:

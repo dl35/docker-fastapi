@@ -22,7 +22,7 @@ class ActivitiesBase(BaseModel):
         except:  
             raise ValueError(f'{v}, format date incoorect ')'''
 
-    @root_validator
+    #@root_validator
     def valid_dist(cls, values):
         v = values.get('dist')
         type = values.get('type')
